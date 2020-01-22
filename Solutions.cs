@@ -86,5 +86,40 @@ namespace HackerRankSolutions
             }
 
         }
+
+
+
+        public static List<List<int>> FindBeforeMatrix(List<List<int>> after)
+        {
+            // Write your code here
+            List<List<int>> result = new List<List<int>>();
+            result[0][0] = after[0][0];
+
+            for(int i = 0; i < after.Count(); i++)
+            {
+                for(int j = 1; j < after[i].Count(); j++)
+                {
+                    result[i][j] = CalculateValue(after[i][j], after, i, j);
+                }              
+            }
+
+            return result;
+
+        }
+
+        public static int CalculateValue(int valueAtPosition, List<List<int>> after, int i, int j)
+        {
+            int value = valueAtPosition;
+
+            for (int x = 0; x < i+1; x++)
+            {
+                for (int y = 0; y < j+1; y++)
+                {
+                    value -= after[x][y];
+                }
+            }
+
+            return value;
+        }
     }
 }
